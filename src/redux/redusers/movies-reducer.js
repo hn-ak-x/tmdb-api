@@ -1,7 +1,8 @@
-import {SET_MOVIES} from "../action-types";
+import {SET_MOVIE, SET_MOVIES} from "../action-types";
 
 const initialState = {
-    movies: []
+    movies: [],
+    movie: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +14,13 @@ const reducer = (state = initialState, action) => {
                 movies: action.payload.results
             }
         }
+        case SET_MOVIE: {
 
+            return {
+                ...state,
+                movie: action.payload
+            }
+        }
         default: return state
     }
 }

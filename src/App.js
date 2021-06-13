@@ -1,10 +1,10 @@
 import './App.css';
-import MoviesList from "./components/MoviesList";
+import Header from "./components/Header";
 
 function App() {
     return (
         <div className="App">
-            <MoviesList />
+           <Header />
         </div>
     );
 }
