@@ -1,21 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import {useLocation} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {getMovie} from "../services/service";
+import React from 'react';
+import '../App.css';
 
-const MovieCard = () => {
-    const location = useLocation();
+import PosterPreview from "./PosterPreview";
 
-    const dispatch = useDispatch();
-    const movie = useSelector(({moviesReducer: {movie}}) => movie)
-
-    useEffect(() => {
-        dispatch(getMovie(location.pathname))
-    }, [])
+const MovieCard = (movie) => {
+    const {
+        title,
+        poster_path,
+        overview,
+        vote_average
+    } = movie.movie;
 
     return (
-        <div>
-            {movie.title}
+        <div className='movie-card'>
+            <PosterPreview url={poster_path}/>
+            <div className='movie-info'>
+                <h4>{title}</h4>
+                <span>{vote_average}</span>
+            </div>
+            <div className='movie-overview'>
+                <h2>Overview:</h2>
+                <p>{overview}</p>
+            </div>
         </div>
     )
 }

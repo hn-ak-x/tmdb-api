@@ -1,8 +1,21 @@
-import {SET_MOVIE, SET_MOVIES} from "../action-types";
+import {
+    SET_CURRENT_PAGE,
+    SET_CURRENT_PAGE_BY_GENRES,
+    SET_MOVIE,
+    SET_MOVIES,
+    SET_MOVIES_WITH_GENRES
+} from "../action-types";
 
 const initialState = {
     movies: [],
-    movie: []
+    movie: [],
+    moviesWithSelectedGenres: [],
+
+    currentPage: 1,
+    totalResults: 0,
+
+    currentPageByGenres: 1,
+    totalResultsByGenres: 0
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +24,7 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
+                totalResults: action.payload.total_results,
                 movies: action.payload.results
             }
         }
@@ -19,6 +33,28 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 movie: action.payload
+            }
+        }
+        case SET_CURRENT_PAGE: {
+
+            return {
+                ...state,
+                currentPage: action.payload,
+            }
+        }
+        case SET_MOVIES_WITH_GENRES: {
+
+            return {
+                ...state,
+                totalResultsByGenres: action.payload.total_results,
+                moviesWithSelectedGenres: action.payload.results
+            }
+        }
+        case SET_CURRENT_PAGE_BY_GENRES: {
+
+            return {
+                ...state,
+                currentPageByGenres: action.payload,
             }
         }
         default: return state
